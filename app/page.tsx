@@ -1,65 +1,52 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const capabilities = [
+  ["01", "Upload your products", "Single products, full catalogues, and combo packs."],
+  ["02", "Choose your visual direction", "Model shoots, flat lays, hanger shots, lifestyle, or tabletop."],
+  ["03", "List everywhere", "Quality-checked images and marketplace-ready listing exports."],
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen overflow-hidden bg-[#f7f7f5] text-[#172118]">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
+        <Link href="/" className="text-2xl font-bold tracking-tight">seller<span className="text-[#4f8a60]">os</span></Link>
+        <div className="flex items-center gap-5 text-sm font-semibold">
+          <a href="#workflow" className="hidden text-[#627067] transition hover:text-[#172118] sm:block">How it works</a>
+          <Link href="/auth" className="rounded-xl bg-[#1e4d32] px-4 py-2.5 text-white transition hover:bg-[#173e29]">Sign in</Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </nav>
+
+      <section className="relative mx-auto max-w-7xl px-6 pb-20 pt-14 lg:px-10 lg:pb-28 lg:pt-24">
+        <div className="absolute right-[-12%] top-0 -z-0 h-120 w-120 rounded-full bg-[#d7f27e]/30 blur-3xl" />
+        <div className="relative max-w-4xl">
+          <p className="mb-6 inline-flex rounded-full border border-[#b9cfba] bg-[#edf5e9] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#376242]">AI operating system for Indian sellers</p>
+          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-8xl">From product photos to marketplace-ready listings.</h1>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-[#617067]">SellerOS generates consistent catalogue images, builds combo shoots, checks image quality, and helps you prepare listings for Meesho, Amazon, and Flipkart.</p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="/auth" className="rounded-xl bg-[#1e4d32] px-5 py-3.5 text-sm font-bold text-white transition hover:bg-[#173e29]">Start with 10 free credits</Link>
+            <a href="#workflow" className="rounded-xl border border-[#cbd4cb] bg-white px-5 py-3.5 text-sm font-bold transition hover:bg-[#f0f3ef]">Explore the workflow</a>
+          </div>
         </div>
-      </main>
-    </div>
+
+        <div className="relative mt-14 grid gap-4 md:grid-cols-3">
+          <PreviewCard title="Catalogue consistency" description="Same model, pose, lighting, crop, and background across every SKU." tone="bg-[#1e4d32] text-white" />
+          <PreviewCard title="Combo generator" description="Turn individual products into pack shots, stacks, flat lays, and model images." tone="bg-[#e9f1d7]" />
+          <PreviewCard title="Marketplace intelligence" description="AI quality signals for Meesho, Amazon, and Flipkart before you publish." tone="bg-white" />
+        </div>
+      </section>
+
+      <section id="workflow" className="border-y border-[#dce2da] bg-white px-6 py-20 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#4f8a60]">One seller workflow</p>
+          <div className="mt-4 flex flex-col justify-between gap-6 md:flex-row md:items-end"><h2 className="max-w-xl text-4xl font-semibold tracking-tight">Create a catalogue that looks like a professional brand shoot.</h2><p className="max-w-sm text-[#68756c]">One workspace from upload to a downloadable image and Excel package.</p></div>
+          <div className="mt-14 grid gap-8 md:grid-cols-3">{capabilities.map(([number, title, description]) => <article key={number} className="border-t border-[#dce2da] pt-5"><span className="text-sm font-bold text-[#5b9969]">{number}</span><h3 className="mt-10 text-xl font-semibold">{title}</h3><p className="mt-3 leading-7 text-[#68756c]">{description}</p></article>)}</div>
+        </div>
+      </section>
+    </main>
   );
+}
+
+function PreviewCard({ title, description, tone }: { title: string; description: string; tone: string }) {
+  return <article className={`min-h-52 rounded-2xl border border-[#dbe2d9] p-6 shadow-sm ${tone}`}><div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-sm font-bold">✦</div><h2 className="mt-12 text-xl font-semibold tracking-tight">{title}</h2><p className="mt-2 text-sm leading-6 opacity-75">{description}</p></article>;
 }

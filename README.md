@@ -1,4 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SellerOS frontend
+
+## Authentication setup
+
+The browser talks to same-origin Next.js route handlers, which proxy requests to Django and store JWTs in HTTP-only cookies. This avoids exposing tokens to browser JavaScript.
+
+1. Copy `.env.example` to `.env.local`.
+2. Set `SELLEROS_API_URL` to the Django API base URL (the default is `http://127.0.0.1:8000/api`).
+3. Start the Django API, then run `npm run dev` here.
+
+The backend endpoints used are `/api/auth/register`, `/api/auth/login`, and `/api/auth/logout`.
 
 ## Getting Started
 
