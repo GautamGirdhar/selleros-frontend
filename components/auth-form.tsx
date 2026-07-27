@@ -2,9 +2,13 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { authService } from "@/services/authService";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Eye, EyeOff } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogin } from "@react-oauth/google";
 
 type Mode = "login" | "register";
 type Step = "auth" | "otp";
@@ -24,6 +28,25 @@ export function AuthForm() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [timer, setTimer] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const googleLogin = useGoogleLogin({
+    flow: "auth-code",
+
+    onSuccess: async (codeResponse) => {
+      try {
+        await authService.googleLogin(codeResponse.code);
+
+        router.push("/dashboard");
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Google Login Failed");
+      }
+    },
+
+    onError: () => {
+      setError("Google Login Failed");
+    },
+  });
 
   useEffect(() => {
     if (timer <= 0) return;
@@ -37,41 +60,43 @@ export function AuthForm() {
     setLoading(true);
 
     const values = new FormData(event.currentTarget);
-    const payload = isLogin
-      ? {
-          username: values.get("username"),
-          password: values.get("password"),
-        }
-      : {
-          full_name: values.get("full_name"),
-          email: values.get("email"),
-          phone_number: values.get("phone_number"),
-          password: values.get("password"),
-          verification_channel: "email",
-        };
+    // const payload = isLogin
+    //   ? {
+    //       username: values.get("username"),
+    //       password: values.get("password"),
+    //     }
+    //   : {
+    //       full_name: values.get("full_name"),
+    //       email: values.get("email"),
+    //       phone_number: values.get("phone_number"),
+    //       password: values.get("password"),
+    //       verification_channel: "email",
+    //     };
 
     try {
-      const response = await fetch(`/api/auth/${mode}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = (await response.json()) as { message?: string };
-      if (!response.ok)
-        throw new Error(
-          data.message || "Something went wrong. Please try again.",
-        );
-
       if (isLogin) {
+        await authService.login({
+          username: String(values.get("username")),
+          password: String(values.get("password")),
+        });
+
         router.push("/dashboard");
-        router.refresh();
         return;
       }
 
-      const emailValue = values.get("email");
-      setIdentifier(typeof emailValue === "string" ? emailValue : "");
+      await authService.register({
+        full_name: String(values.get("full_name")),
+        email: String(values.get("email")),
+        phone_number: String(values.get("phone_number")),
+        password: String(values.get("password")),
+      });
+
+      setIdentifier(String(values.get("email")));
+
       setOtp(["", "", "", "", "", ""]);
-      setTimer(RESEND_COOLDOWN);
+
+      setTimer(30);
+
       setStep("otp");
     } catch (cause) {
       setError(
@@ -102,32 +127,20 @@ export function AuthForm() {
   }
 
   async function verifyOTP() {
-    setError("");
     setLoading(true);
+
+    setError("");
+
     try {
-      const response = await fetch(`/api/auth/verify-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          identifier,
-          verification_channel: "email",
-          code: otp.join(""),
-        }),
+      await authService.verifyOTP({
+        identifier,
+
+        code: otp.join(""),
       });
-      const data = (await response.json()) as { message?: string };
-      if (!response.ok)
-        throw new Error(
-          data.message || "That code didn't work. Please try again.",
-        );
 
       router.push("/dashboard");
-      router.refresh();
-    } catch (cause) {
-      setError(
-        cause instanceof Error
-          ? cause.message
-          : "Something went wrong. Please try again.",
-      );
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "OTP verification failed.");
     } finally {
       setLoading(false);
     }
@@ -137,11 +150,10 @@ export function AuthForm() {
     setError("");
     setLoading(true);
     try {
-      const response = await fetch(`/api/auth/resend-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ identifier, verification_channel: "EMAIL" }),
-      });
+      const response = await authService.resendOTP(identifier);
+      setOtp(["", "", "", "", "", ""]);
+      setTimer(30);
+      inputRefs.current[0]?.focus();
       const data = (await response.json()) as { message?: string };
       if (!response.ok)
         throw new Error(
@@ -172,7 +184,7 @@ export function AuthForm() {
     <main className="grid min-h-screen lg:grid-cols-[1.05fr_0.95fr]">
       <section className="relative hidden overflow-hidden bg-[#1e4d32] p-12 text-white lg:flex lg:flex-col">
         <div className="absolute -right-32 top-20 h-96 w-96 rounded-full bg-[#c7e36b]/15 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full border-[40px] border-[#d7f27e]/20" />
+        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full border-40 border-[#d7f27e]/20" />
         <div className="relative text-xl font-bold tracking-tight">
           seller<span className="text-[#d7f27e]">os</span>
         </div>
@@ -201,7 +213,7 @@ export function AuthForm() {
       </section>
 
       <section className="flex items-center justify-center px-5 py-10 sm:px-10">
-        <div className="w-full max-w-[420px]">
+        <div className="w-full max-w-105">
           <div className="mb-11 flex items-center justify-between lg:hidden">
             <span className="text-xl font-bold tracking-tight">
               seller<span className="text-[#4f8a60]">os</span>
@@ -244,6 +256,46 @@ export function AuthForm() {
                 </button>
               </div>
 
+              <div className="mt-8 space-y-5">
+                <button
+                  type="button"
+                  onClick={() => googleLogin()}
+                  className="
+      flex
+      w-full
+      items-center
+      justify-center
+      gap-3
+      rounded-xl
+      border
+      border-gray-200
+      bg-white
+      py-3.5
+      font-medium
+      shadow-sm
+      transition-all
+      hover:border-[#4f8a60]
+      hover:bg-[#f7faf8]
+      hover:shadow-md
+    "
+                >
+                  <FcGoogle className="text-2xl" />
+                  Continue with Google
+                </button>
+
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-200" />
+                  </div>
+
+                  <div className="relative flex justify-center">
+                    <span className=" px-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
+                      Or continue with email
+                    </span>
+                  </div>
+                </div>
+              </div>
+
               <form className="space-y-5" onSubmit={submit}>
                 {!isLogin && (
                   <Field
@@ -278,14 +330,36 @@ export function AuthForm() {
                     />
                   </>
                 )}
-                <Field
-                  id="password"
-                  label="Password"
-                  type="password"
-                  placeholder="At least 8 characters"
-                  autoComplete={isLogin ? "current-password" : "new-password"}
-                  minLength={8}
-                />
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      name="password"
+                      required
+                      type={showPassword ? "text" : "password"}
+                      placeholder="At least 8 characters"
+                      autoComplete={
+                        isLogin ? "current-password" : "new-password"
+                      }
+                      minLength={8}
+                      className="pr-12"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-black"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
                 {error && (
                   <p
                     className="rounded-xl border border-red-200 bg-red-50 px-3.5 py-3 text-sm text-red-700"
@@ -302,10 +376,6 @@ export function AuthForm() {
                       : "Get 10 free credits"}
                 </Button>
               </form>
-              <p className="mt-7 text-center text-xs leading-5 text-[#7a837b]">
-                By continuing, you agree to SellerOS&apos;s Terms of Service and
-                Privacy Policy.
-              </p>
             </>
           ) : (
             <>
