@@ -5,7 +5,13 @@ import { useUser } from "@/hooks/useUser";
 import { UserDropdown } from "./UserDropdown";
 
 export default function Navbar() {
-  const { user, isLoading } = useUser();
+  const { user, isLoading, error } = useUser();
+
+  console.log({
+    user,
+    isLoading,
+    error,
+  });
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-white px-8">
