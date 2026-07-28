@@ -8,7 +8,7 @@ export function Input({
   return (
     <input
       className={cn(
-        "h-11 w-full rounded-xl border border-[#d8ddd6] bg-white px-3.5 text-sm outline-none transition placeholder:text-[#8a938b] focus:border-[#1e4d32] focus:ring-4 focus:ring-[#1e4d32]/10",
+        "h-11 w-full rounded-xl border border-[#d8ddd6] bg-surface px-3.5 text-sm outline-none transition placeholder:text-[#8a938b] focus:border-[#1e4d32] focus:ring-4 focus:ring-[#1e4d32]/10",
         className,
       )}
       {...props}

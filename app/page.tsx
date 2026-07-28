@@ -20,21 +20,21 @@ const capabilities = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#f7f7f5] text-[#172118]">
+    <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
         <Link href="/" className="text-2xl font-bold tracking-tight">
-          seller<span className="text-[#4f8a60]">os</span>
+          seller<span className="text-primary">os</span>
         </Link>
         <div className="flex items-center gap-5 text-sm font-semibold">
           <a
             href="#workflow"
-            className="hidden text-[#627067] transition hover:text-[#172118] sm:block"
+            className="hidden text-muted-foreground transition hover:text-foreground sm:block"
           >
             How it works
           </a>
           <Link
             href="/auth"
-            className="rounded-xl bg-[#1e4d32] px-4 py-2.5 text-white transition hover:bg-[#173e29]"
+            className="rounded-xl bg-primary px-4 py-2.5 text-primary-foreground transition hover:bg-primary/90"
           >
             Sign in
           </Link>
@@ -42,15 +42,15 @@ export default function Home() {
       </nav>
 
       <section className="relative mx-auto max-w-7xl px-6 pb-20 pt-14 lg:px-10 lg:pb-28 lg:pt-24">
-        <div className="absolute right-[-12%] top-0 z-0 h-120 w-120 rounded-full bg-[#d7f27e]/30 blur-3xl" />
+        <div className="absolute right-[-12%] top-0 z-0 h-120 w-120 rounded-full bg-primary/20 blur-3xl" />
         <div className="relative max-w-4xl">
-          <p className="mb-6 inline-flex rounded-full border border-[#b9cfba] bg-[#edf5e9] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#376242]">
+          <p className="mb-6 inline-flex rounded-full border border-border bg-muted px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-primary">
             AI operating system for Indian sellers
           </p>
           <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-8xl">
             From product photos to marketplace-ready listings.
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-[#617067]">
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">
             SellerOS generates consistent catalogue images, builds combo shoots,
             checks image quality, and helps you prepare listings for Meesho,
             Amazon, and Flipkart.
@@ -58,13 +58,13 @@ export default function Home() {
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
               href="/auth"
-              className="rounded-xl bg-[#1e4d32] px-5 py-3.5 text-sm font-bold text-white transition hover:bg-[#173e29]"
+              className="rounded-xl bg-primary px-5 py-3.5 text-sm font-bold text-primary-foreground transition hover:bg-primary/90"
             >
               Start with 10 free credits
             </Link>
             <a
               href="#workflow"
-              className="rounded-xl border border-[#cbd4cb] bg-white px-5 py-3.5 text-sm font-bold transition hover:bg-[#f0f3ef]"
+              className="rounded-xl border border-border bg-card px-5 py-3.5 text-sm font-bold transition hover:bg-muted"
             >
               Explore the workflow
             </a>
@@ -75,46 +75,46 @@ export default function Home() {
           <PreviewCard
             title="Catalogue consistency"
             description="Same model, pose, lighting, crop, and background across every SKU."
-            tone="bg-[#1e4d32] text-white"
+            tone="bg-primary text-primry-foreground"
           />
           <PreviewCard
             title="Combo generator"
             description="Turn individual products into pack shots, stacks, flat lays, and model images."
-            tone="bg-[#e9f1d7]"
+            tone="bg-secondary"
           />
           <PreviewCard
             title="Marketplace intelligence"
             description="AI quality signals for Meesho, Amazon, and Flipkart before you publish."
-            tone="bg-white"
+            tone="bg-card"
           />
         </div>
       </section>
 
       <section
         id="workflow"
-        className="border-y border-[#dce2da] bg-white px-6 py-20 lg:px-10"
+        className="border-y border-border bg-card px-6 py-20 lg:px-10"
       >
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#4f8a60]">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
             One seller workflow
           </p>
           <div className="mt-4 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <h2 className="max-w-xl text-4xl font-semibold tracking-tight">
               Create a catalogue that looks like a professional brand shoot.
             </h2>
-            <p className="max-w-sm text-[#68756c]">
+            <p className="max-w-sm text-muted-foreground">
               One workspace from upload to a downloadable image and Excel
               package.
             </p>
           </div>
           <div className="mt-14 grid gap-8 md:grid-cols-3">
             {capabilities.map(([number, title, description]) => (
-              <article key={number} className="border-t border-[#dce2da] pt-5">
-                <span className="text-sm font-bold text-[#5b9969]">
-                  {number}
-                </span>
+              <article key={number} className="border-t border-border pt-5">
+                <span className="text-sm font-bold text-primary">{number}</span>
                 <h3 className="mt-10 text-xl font-semibold">{title}</h3>
-                <p className="mt-3 leading-7 text-[#68756c]">{description}</p>
+                <p className="mt-3 leading-7 text-muted-foreground">
+                  {description}
+                </p>
               </article>
             ))}
           </div>
@@ -135,9 +135,9 @@ function PreviewCard({
 }) {
   return (
     <article
-      className={`min-h-52 rounded-2xl border border-[#dbe2d9] p-6 shadow-sm ${tone}`}
+      className={`min-h-52 rounded-2xl border border-border p-6 shadow-sm ${tone}`}
     >
-      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-sm font-bold">
+      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-background/20 text-sm font-bold">
         ✦
       </div>
       <h2 className="mt-12 text-xl font-semibold tracking-tight">{title}</h2>

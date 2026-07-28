@@ -48,9 +48,23 @@ export function UserDropdown({ user }: Props) {
 
   return (
     <div ref={ref} className="relative">
+      {/* Trigger Button */}
+
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-3 rounded-xl px-2 py-1 transition hover:bg-gray-100"
+        className="
+          flex
+          items-center
+          gap-3
+          rounded-xl
+          border
+          border-border
+          bg-card
+          px-3
+          py-1.5
+          transition
+          hover:bg-muted
+        "
       >
         <Image
           src={
@@ -63,17 +77,32 @@ export function UserDropdown({ user }: Props) {
         />
 
         <div className="hidden text-left lg:block">
-          <p className="font-semibold">{user.full_name}</p>
+          <p className="font-semibold text-foreground">{user.full_name}</p>
 
-          <p className="text-xs text-gray-500">{user.email}</p>
+          <p className="text-xs text-muted-foreground">{user.email}</p>
         </div>
 
-        <ChevronDown className="h-4 w-4 text-gray-500" />
+        <ChevronDown className="h-4 w-4 text-muted-foreground" />
       </button>
 
+      {/* Dropdown */}
+
       {open && (
-        <div className="absolute right-0 mt-3 w-72 overflow-hidden rounded-2xl border bg-white shadow-xl">
-          <div className="border-b p-5">
+        <div
+          className="
+            absolute
+            right-0
+            mt-3
+            w-72
+            overflow-hidden
+            rounded-2xl
+            border
+            border-border
+            bg-card
+            shadow-xl
+          "
+        >
+          <div className="border-b border-border p-5">
             <div className="flex gap-4">
               <Image
                 src={
@@ -87,9 +116,11 @@ export function UserDropdown({ user }: Props) {
               />
 
               <div>
-                <h3 className="font-semibold">{user.full_name}</h3>
+                <h3 className="font-semibold text-foreground">
+                  {user.full_name}
+                </h3>
 
-                <p className="text-sm text-gray-500">{user.email}</p>
+                <p className="text-sm text-muted-foreground">{user.email}</p>
               </div>
             </div>
           </div>
@@ -98,7 +129,18 @@ export function UserDropdown({ user }: Props) {
             onClick={() => {
               router.push("/settings");
             }}
-            className="flex w-full items-center gap-3 px-5 py-4 text-left hover:bg-gray-50"
+            className="
+              flex
+              w-full
+              items-center
+              gap-3
+              px-5
+              py-4
+              text-left
+              text-foreground
+              transition
+              hover:bg-muted
+            "
           >
             <Settings className="h-5 w-5" />
             Settings
@@ -106,7 +148,18 @@ export function UserDropdown({ user }: Props) {
 
           <button
             onClick={logout}
-            className="flex w-full items-center gap-3 px-5 py-4 text-left text-red-600 hover:bg-red-50"
+            className="
+              flex
+              w-full
+              items-center
+              gap-3
+              px-5
+              py-4
+              text-left
+              text-destructive
+              transition
+              hover:bg-destructive/10
+            "
           >
             <LogOut className="h-5 w-5" />
             Sign Out

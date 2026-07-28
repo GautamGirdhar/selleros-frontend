@@ -36,7 +36,7 @@ export default function InternalLayout({ children }: Props) {
   if (!token || isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-green-600 border-t-transparent" />
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-brand border-t-transparent" />
       </div>
     );
   }
@@ -44,7 +44,7 @@ export default function InternalLayout({ children }: Props) {
   if (!user) return null;
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-app">
       {/* Sidebar */}
 
       <Sidebar />

@@ -31,39 +31,46 @@ const items = [
 
 export function Sidebar() {
   const pathname = usePathname();
-
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <aside
       className={cn(
-        "relative flex h-screen flex-col border-r bg-white transition-all duration-300",
+        "relative flex h-screen flex-col border-r border-border bg-surface transition-all duration-300",
         collapsed ? "w-20" : "w-72",
       )}
     >
       {/* Logo */}
 
-      <div className="flex h-18 items-center justify-between border-b px-6">
+      <div className="flex h-18 items-center justify-between border-b border-border px-6">
         <Link
           href="/dashboard"
           className={cn(
-            "font-bold tracking-tight",
+            "font-bold tracking-tight text-foreground",
             collapsed ? "text-xl" : "text-2xl",
           )}
         >
           {!collapsed && (
             <>
-              seller<span className="text-[#4f8a60]">os</span>
+              seller<span className="text-primary">os</span>
             </>
           )}
 
-          {collapsed && <span className="text-[#4f8a60] font-black">S</span>}
+          {collapsed && <span className="font-black text-primary">S</span>}
         </Link>
 
         {!collapsed && (
           <button
             onClick={() => setCollapsed(true)}
-            className="rounded-lg p-2 hover:bg-gray-100"
+            className="
+              rounded-xl
+              border
+              border-border
+              bg-card
+              p-2
+              transition
+              hover:bg-muted
+            "
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -72,7 +79,17 @@ export function Sidebar() {
         {collapsed && (
           <button
             onClick={() => setCollapsed(false)}
-            className="absolute -right-3 top-6 rounded-full border bg-white p-1 shadow"
+            className="
+              absolute
+              -right-3
+              top-6
+              rounded-full
+              border
+              border-border
+              bg-card
+              p-1
+              shadow-sm
+            "
           >
             <ChevronLeft className="h-4 w-4 rotate-180" />
           </button>
@@ -95,8 +112,8 @@ export function Sidebar() {
               className={cn(
                 "flex items-center rounded-xl px-4 py-3 text-sm font-medium transition-all",
                 active
-                  ? "bg-[#1e4d32] text-white shadow"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-black",
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
             >
               <Icon className="h-5 w-5 shrink-0" />
@@ -110,15 +127,25 @@ export function Sidebar() {
       {/* Footer */}
 
       {!collapsed && (
-        <div className="border-t p-5">
-          <div className="rounded-xl bg-[#f6f8f6] p-4">
-            <p className="text-xs uppercase tracking-wider text-gray-500">
+        <div className="border-t border-border p-5">
+          <div
+            className="
+              rounded-2xl
+              border
+              border-border
+              bg-card
+              p-4
+            "
+          >
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">
               Free Plan
             </p>
 
-            <h3 className="mt-1 font-semibold">10 Credits Remaining</h3>
+            <h3 className="mt-1 font-semibold text-foreground">
+              10 Credits Remaining
+            </h3>
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-muted-foreground">
               Upgrade anytime for unlimited AI generations.
             </p>
           </div>

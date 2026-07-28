@@ -181,44 +181,43 @@ export function AuthForm() {
   }
 
   return (
-    <main className="grid min-h-screen lg:grid-cols-[1.05fr_0.95fr]">
-      <section className="relative hidden overflow-hidden bg-[#1e4d32] p-12 text-white lg:flex lg:flex-col">
-        <div className="absolute -right-32 top-20 h-96 w-96 rounded-full bg-[#c7e36b]/15 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full border-40 border-[#d7f27e]/20" />
+    <main className="grid h-screen overflow-hidden lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="relative flex flex-col justify-between overflow-hidden bg-primary p-12 text-primary-foreground">
+        <div className="absolute -right-32 top-20 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full border-40 border-primary/20" />
         <div className="relative text-xl font-bold tracking-tight">
-          seller<span className="text-[#d7f27e]">os</span>
+          seller<span className="text-primary-light">os</span>
         </div>
         <div className="relative my-auto max-w-md">
-          <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-[#d7f27e]">
+          <p className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-primary-light">
             AI seller operating system
           </p>
           <h1 className="text-5xl font-semibold leading-[1.08] tracking-tight">
             Make every product listing look brand-ready.
           </h1>
-          <p className="mt-6 text-lg leading-8 text-white/70">
+          <p className="mt-6 text-lg leading-8 text-primary-foreground/70">
             Generate catalogue images, combo shots, and marketplace-ready
             exports from one workspace.
           </p>
         </div>
         <div className="relative grid grid-cols-2 gap-3 text-sm">
-          <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-            <strong className="block text-[#d7f27e]">10 credits</strong>
-            <span className="text-white/60">Free to start</span>
+          <div className="rounded-2xl border border-surface/10 bg-primary-foreground/5 p-3">
+            <strong className="block text-primary-light">10 credits</strong>
+            <span className="text-primary-foreground/60">Free to start</span>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-            <strong className="block text-[#d7f27e]">3 marketplaces</strong>
-            <span className="text-white/60">Ready to list</span>
+          <div className="rounded-2xl border border-surface/10 bg-rimary-foreground/5 p-3">
+            <strong className="block text-primary-light">3 marketplaces</strong>
+            <span className="text-primary-foreground/60">Ready to list</span>
           </div>
         </div>
       </section>
-
-      <section className="flex items-center justify-center px-5 py-10 sm:px-10">
-        <div className="w-full max-w-105">
+      <section className="flex h-screen justify-center overflow-y-auto px-8 py-10">
+        <div className="w-full my-auto max-w-110">
           <div className="mb-11 flex items-center justify-between lg:hidden">
             <span className="text-xl font-bold tracking-tight">
-              seller<span className="text-[#4f8a60]">os</span>
+              seller<span className="text-primary">os</span>
             </span>
-            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6b746d]">
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
               AI seller workspace
             </span>
           </div>
@@ -226,31 +225,31 @@ export function AuthForm() {
           {step === "auth" ? (
             <>
               <div className="mb-8">
-                <p className="text-sm font-semibold text-[#4f8a60]">
+                <p className="text-sm font-semibold text-primary">
                   Welcome to SellerOS
                 </p>
-                <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#172118]">
+                <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground">
                   {isLogin ? "Sign in to your account" : "Create your account"}
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-[#69736b]">
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   {isLogin
                     ? "Continue creating catalogues, images, and listings."
                     : "Your account starts with 10 credits to create your first product visuals."}
                 </p>
               </div>
 
-              <div className="mb-7 grid grid-cols-2 rounded-xl bg-[#e9ede8] p-1">
+              <div className="mb-7 grid grid-cols-2 rounded-2xl bg-muted p-1">
                 <button
                   type="button"
                   onClick={() => changeMode("login")}
-                  className={`rounded-[9px] py-2.5 text-sm font-semibold transition ${isLogin ? "bg-white text-[#172118] shadow-sm" : "text-[#6a746b]"}`}
+                  className={`rounded-2xl py-2.5 text-sm font-semibold transition ${isLogin ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}
                 >
                   Sign in
                 </button>
                 <button
                   type="button"
                   onClick={() => changeMode("register")}
-                  className={`rounded-[9px] py-2.5 text-sm font-semibold transition ${!isLogin ? "bg-white text-[#172118] shadow-sm" : "text-[#6a746b]"}`}
+                  className={`rounded-2xl py-2.5 text-sm font-semibold transition ${!isLogin ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}
                 >
                   Create account
                 </button>
@@ -261,23 +260,23 @@ export function AuthForm() {
                   type="button"
                   onClick={() => googleLogin()}
                   className="
-      flex
-      w-full
-      items-center
-      justify-center
-      gap-3
-      rounded-xl
-      border
-      border-gray-200
-      bg-white
-      py-3.5
-      font-medium
-      shadow-sm
-      transition-all
-      hover:border-[#4f8a60]
-      hover:bg-[#f7faf8]
-      hover:shadow-md
-    "
+flex
+w-full
+items-center
+justify-center
+gap-3
+rounded-xl
+border
+border-border
+bg-card
+py-3.5
+font-medium
+shadow-sm
+transition-all
+hover:border-primary
+hover:bg-muted
+hover:shadow-md
+"
                 >
                   <FcGoogle className="text-2xl" />
                   Continue with Google
@@ -285,18 +284,18 @@ export function AuthForm() {
 
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200" />
+                    <div className="w-full border-t border-default" />
                   </div>
 
                   <div className="relative flex justify-center">
-                    <span className=" px-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
+                    <span className=" px-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                       Or continue with email
                     </span>
                   </div>
                 </div>
               </div>
 
-              <form className="space-y-5" onSubmit={submit}>
+              <form className="space-y-5 min-h-107.5" onSubmit={submit}>
                 {!isLogin && (
                   <Field
                     id="full_name"
@@ -350,7 +349,7 @@ export function AuthForm() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-black"
+                      className="absolute inset-y-0 right-3 flex items-center text-secondary hover:text-foreground"
                     >
                       {showPassword ? (
                         <EyeOff className="h-5 w-5" />
@@ -362,13 +361,29 @@ export function AuthForm() {
                 </div>
                 {error && (
                   <p
-                    className="rounded-xl border border-red-200 bg-red-50 px-3.5 py-3 text-sm text-red-700"
+                    className="rounded-2xl border border-destructive bg-destructive-foreground px-3.5 py-3 text-sm text-desructive"
                     role="alert"
                   >
                     {error}
                   </p>
                 )}
-                <Button type="submit" disabled={loading}>
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="
+    w-full
+    rounded-xl
+    bg-primary
+    py-6
+    text-md
+    font-semibold
+    text-primary-foreground
+    shadow-sm
+    transition-all
+    hover:bg-primary/90
+    hover:shadow-md
+  "
+                >
                   {loading
                     ? "Please wait…"
                     : isLogin
@@ -380,15 +395,15 @@ export function AuthForm() {
           ) : (
             <>
               <div className="mb-8">
-                <p className="text-sm font-semibold text-[#4f8a60]">
+                <p className="text-sm font-semibold text-primary">
                   Verify your email
                 </p>
-                <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[#172118]">
+                <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground">
                   Enter your code
                 </h2>
-                <p className="mt-2 text-sm leading-6 text-[#69736b]">
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   We sent a 6-digit code to{" "}
-                  <span className="font-medium text-[#172118]">
+                  <span className="font-medium text-foreground">
                     {identifier}
                   </span>
                   . Enter it below to activate your account.
@@ -405,7 +420,7 @@ export function AuthForm() {
                     value={digit}
                     inputMode="numeric"
                     maxLength={1}
-                    className="h-14 w-14 rounded-md border border-input bg-background text-center text-xl outline-none focus:ring-2 focus:ring-ring"
+                    className="h-14 w-14 rounded-2xl border border-input bg-background text-center text-xl outline-none focus:ring-2 focus:ring-ring"
                     onChange={(e) => handleOtpChange(e.target.value, index)}
                     onKeyDown={(e) => handleBackspace(e, index)}
                   />
@@ -414,7 +429,7 @@ export function AuthForm() {
 
               {error && (
                 <p
-                  className="mt-4 rounded-xl border border-red-200 bg-red-50 px-3.5 py-3 text-sm text-red-700"
+                  className="mt-4 rounded-2xl border border-destructive/30 bg-destructive/10 px-3.5 py-3 text-sm text-destructive"
                   role="alert"
                 >
                   {error}
@@ -431,7 +446,7 @@ export function AuthForm() {
 
               <div className="mt-6 text-center">
                 {timer > 0 ? (
-                  <p className="text-sm text-[#69736b]">
+                  <p className="text-sm text-muted-foreground">
                     Resend code in {timer}s
                   </p>
                 ) : (
@@ -439,7 +454,7 @@ export function AuthForm() {
                     type="button"
                     onClick={resendOTP}
                     disabled={loading}
-                    className="text-sm font-medium text-[#4f8a60] hover:underline"
+                    className="text-sm font-medium text-primary hover:underline"
                   >
                     Resend code
                   </button>
@@ -448,7 +463,7 @@ export function AuthForm() {
 
               <button
                 type="button"
-                className="mt-8 w-full text-center text-sm text-[#69736b] hover:underline"
+                className="mt-8 w-full text-center text-sm text-muted-foreground hover:underline"
                 onClick={() => {
                   setStep("auth");
                   setOtp(["", "", "", "", "", ""]);
