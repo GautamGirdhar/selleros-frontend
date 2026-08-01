@@ -418,6 +418,13 @@
   resolved "https://registry.npmjs.org/@hono/node-server/-/node-server-1.19.15.tgz"
   integrity sha512-Za2ai6TLdKjUvnur+eenO6nuYYipVAEhyCAdaV8IRvmU9kK8crOZUSYvIXn72E4f8fJqyAbpcJuTsYYmZp9Deg==
 
+"@hookform/resolvers@^5.5.7":
+  version "5.5.7"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-5.5.7.tgz#03cf4283686490c0747c828afb94d3cfc63b2d4d"
+  integrity sha512-CyPCYV8/KlXfEXLWj8HHHhVsR/IZ6Ckm3b/a4fWtO/lRnRK1huqncb8LlAWrmpPRsse5glF5aVuDRMHEr3UGag==
+  dependencies:
+    "@standard-schema/utils" "^0.3.0"
+
 "@humanfs/core@^0.19.2":
   version "0.19.2"
   resolved "https://registry.npmjs.org/@humanfs/core/-/core-0.19.2.tgz"
@@ -1421,6 +1428,11 @@
   version "4.0.0"
   resolved "https://registry.npmjs.org/@sindresorhus/merge-streams/-/merge-streams-4.0.0.tgz"
   integrity sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==
+
+"@standard-schema/utils@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@standard-schema/utils/-/utils-0.3.0.tgz#3d5e608f16c2390c10528e98e59aef6bf73cae7b"
+  integrity sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==
 
 "@swc/helpers@0.5.15":
   version "0.5.15"
@@ -4677,6 +4689,11 @@ react-dom@19.2.4:
   dependencies:
     scheduler "^0.27.0"
 
+react-hook-form@^7.83.0:
+  version "7.83.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.83.0.tgz#b4d43c42108645c2ae4d425ada2818d03522e8a9"
+  integrity sha512-AXt8cMCmx5a7u4uvpb2uRFVrWQhllI4pV+LSykxIac/hjt44TnQkmX9BKuQi2i+LDC62esmiLpilkav+kjVf/A==
+
 react-icons@^5.7.0:
   version "5.7.0"
   resolved "https://registry.npmjs.org/react-icons/-/react-icons-5.7.0.tgz"
@@ -5492,6 +5509,11 @@ use-callback-ref@^1.3.3:
   dependencies:
     tslib "^2.0.0"
 
+use-debounce@^10.1.1:
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-10.1.1.tgz#b08b596b60a55fd4c18b44b37fdc02f058baf30a"
+  integrity sha512-kvds8BHR2k28cFsxW8k3nc/tRga2rs1RHYCqmmGqb90MEeE++oALwzh2COiuBLO1/QXiOuShXoSN2ZpWnMmvuQ==
+
 use-sidecar@^1.1.3:
   version "1.1.3"
   resolved "https://registry.npmjs.org/use-sidecar/-/use-sidecar-1.1.3.tgz"
@@ -5640,4 +5662,9 @@ zod@^3.24.1:
 "zod@^3.25 || ^4.0", "zod@^3.25.0 || ^4.0.0":
   version "4.4.3"
   resolved "https://registry.npmjs.org/zod/-/zod-4.4.3.tgz"
+  integrity sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==
+
+zod@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-4.4.3.tgz#b680f172885d18bbebf21a834ea25e55a1bbf356"
   integrity sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==

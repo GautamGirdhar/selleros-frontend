@@ -7,6 +7,7 @@ import {
   ImageIcon,
   Settings,
   ChevronLeft,
+  Calculator,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,11 @@ const items = [
     title: "AI Images",
     href: "/ai-images",
     icon: ImageIcon,
+  },
+  {
+    title: "Price Calculator",
+    href: "/pricecalculator",
+    icon: Calculator,
   },
   {
     title: "Settings",
