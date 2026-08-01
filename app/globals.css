@@ -101,6 +101,17 @@ body {
 
   --card: #ffffff;
   --card-foreground: #111827;
+
+  /* ========= Shadcn utility aliases ========= */
+  --muted: var(--surface-secondary);
+  --muted-foreground: var(--foreground-muted);
+  --accent: var(--surface-secondary);
+  --accent-foreground: var(--foreground);
+  --secondary-foreground: var(--secondary-foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --input: var(--border);
+  --ring: var(--primary);
 }
 
 .dark {
@@ -147,6 +158,16 @@ body {
 
   --card: #111827;
   --card-foreground: #f9fafb;
+
+  /* ========= Shadcn utility aliases ========= */
+  --muted: var(--surface-secondary);
+  --muted-foreground: var(--foreground-muted);
+  --accent: var(--surface-secondary);
+  --accent-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --input: var(--border);
+  --ring: var(--primary);
 }
 
 @layer base {

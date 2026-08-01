@@ -48,8 +48,8 @@ function Panel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-[#e7e7e5] bg-white p-5">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#8a938b]">
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-shadow">
+      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
         {title}
       </p>
       <div className="space-y-2">{children}</div>
@@ -70,8 +70,8 @@ function Row({
     <div
       className={`flex items-center justify-between text-sm ${
         bold
-          ? "border-t border-[#e7e7e5] pt-2 font-semibold text-[#172118]"
-          : "text-[#5b645c]"
+          ? "border-t border-border pt-2 font-semibold text-foreground"
+          : "text-foreground-secondary"
       }`}
     >
       <span>{label}</span>

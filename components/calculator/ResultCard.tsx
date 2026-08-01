@@ -10,21 +10,23 @@ export default function ResultCard({
   loading: boolean;
 }) {
   return (
-    <div className="rounded-2xl border border-[#e7e7e5] bg-white p-6">
-      <p className="text-xs font-medium uppercase tracking-wide text-[#8a938b]">
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-shadow">
+      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
         List your price at
       </p>
-      <p className="mt-1 text-4xl font-bold text-[#f04923]">
+      <p className="mt-1 text-5xl font-bold text-secondary">
         {loading || !data ? "…" : `₹${data.listingPrice.toFixed(2)}`}
       </p>
       {data && (
-        <p className="mt-1 text-xs text-[#8a938b]">
+        <p className="mt-1 text-xs text-muted-foreground">
           Including GST · Break-even ₹
           {(data.listingPrice - data.profit).toFixed(2)}
         </p>
       )}
 
-      <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+      <div className="my-6 border-t border-border" />
+
+      <div className="grid grid-cols-3 gap-4 text-center sm:text-left">
         <Stat
           label="Margin"
           value={data ? `${data.margin.toFixed(1)}%` : "—"}
@@ -44,8 +46,10 @@ export default function ResultCard({
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-xs uppercase tracking-wide text-[#8a938b]">{label}</p>
-      <p className="mt-1 text-base font-semibold text-[#172118]">{value}</p>
+      <p className="text-xs uppercase tracking-wide text-muted-foreground">
+        {label}
+      </p>
+      <p className="mt-1 text-lg font-semibold text-foreground">{value}</p>
     </div>
   );
 }
@@ -55,18 +59,18 @@ function ProportionBar({ data }: { data: PriceCalculatorResult }) {
     {
       label: "Cost",
       value: data.totalCost - data.platformFee,
-      color: "#3b82f6",
+      color: "var(--info)",
     },
-    { label: "Platform fee", value: data.platformFee, color: "#f59e0b" },
-    { label: "Damage", value: data.damagedCost, color: "#94a3b8" },
-    { label: "Profit", value: data.profit, color: "#22c55e" },
-    { label: "GST", value: data.gst, color: "#a78bfa" },
+    { label: "Platform fee", value: data.platformFee, color: "var(--warning)" },
+    { label: "Damage", value: data.damagedCost, color: "var(--danger)" },
+    { label: "Profit", value: data.profit, color: "var(--success)" },
+    { label: "GST", value: data.gst, color: "var(--foreground-muted)" },
   ];
   const total = segments.reduce((sum, s) => sum + Math.max(s.value, 0), 0) || 1;
 
   return (
     <div className="mt-6">
-      <div className="flex h-2 w-full overflow-hidden rounded-full">
+      <div className="flex h-2 w-full overflow-hidden rounded-full bg-muted">
         {segments.map((s) => (
           <div
             key={s.label}
@@ -77,7 +81,7 @@ function ProportionBar({ data }: { data: PriceCalculatorResult }) {
           />
         ))}
       </div>
-      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#5b645c]">
+      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-foreground-secondary">
         {segments.map((s) => (
           <span key={s.label} className="flex items-center gap-1.5">
             <span

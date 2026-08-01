@@ -41,16 +41,13 @@ export default function PriceCalculator() {
   }, [debounced]);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
+    <div className="grid gap-6 lg:grid-cols-5">
       <div className="lg:col-span-2">
         <CalculatorForm form={form} />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-6 lg:col-span-3">
         <ResultCard data={mutation.data} loading={mutation.isPending} />
-      </div>
-
-      <div className="lg:col-span-3">
         <BreakdownTable data={mutation.data} />
       </div>
     </div>

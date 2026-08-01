@@ -20,23 +20,23 @@ export default function CalculatorForm({
   const platform = watch("platform");
 
   return (
-    <div className="rounded-2xl border border-[#e7e7e5] bg-white p-6">
-      <h2 className="mb-5 text-sm font-semibold text-[#172118]">Calculator</h2>
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-shadow">
+      <h2 className="mb-4 text-sm font-semibold text-foreground">Calculator</h2>
 
-      <div className="mb-6">
-        <Label className="mb-2 block text-xs font-medium uppercase tracking-wide text-[#8a938b]">
+      <div className="mb-5">
+        <Label className="mb-2 block text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
           Platform
         </Label>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-3 gap-2">
           {PLATFORMS.map((p) => (
             <button
               key={p.id}
               type="button"
               onClick={() => setValue("platform", p.id, { shouldDirty: true })}
-              className={`flex-1 rounded-lg border py-2.5 text-sm font-medium transition ${
+              className={`rounded-lg border py-2.5 text-xs font-medium transition sm:text-sm ${
                 platform === p.id
-                  ? "border-[#f04923] bg-[#fff3ef] text-[#f04923]"
-                  : "border-[#e7e7e5] text-[#5b645c] hover:border-[#c9d0ca]"
+                  ? "border-secondary bg-secondary/10 text-secondary"
+                  : "border-border text-foreground-secondary hover:border-muted-foreground"
               }`}
             >
               {p.label}
@@ -45,7 +45,7 @@ export default function CalculatorForm({
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="space-y-4">
         <NumberField
           id="productCost"
           label="Product Cost (Without GST)"
@@ -110,13 +110,13 @@ function NumberField({
     <div>
       <Label
         htmlFor={id}
-        className="mb-2 block text-xs font-medium text-[#5b645c]"
+        className="mb-2 block text-xs font-medium text-foreground-secondary"
       >
         {label}
       </Label>
       <div className="relative">
         {prefix && (
-          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#8a938b]">
+          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
             {prefix}
           </span>
         )}
@@ -124,11 +124,13 @@ function NumberField({
           id={id}
           type="number"
           step="any"
-          className={prefix ? "pl-7" : suffix ? "pr-8" : ""}
+          className={`border-border bg-surface text-foreground ${
+            prefix ? "pl-7" : suffix ? "pr-8" : ""
+          }`}
           {...register(id, { valueAsNumber: true })}
         />
         {suffix && (
-          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#8a938b]">
+          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
             {suffix}
           </span>
         )}
